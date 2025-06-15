@@ -208,7 +208,15 @@
             </div>
         </div>
     </footer>
+    <script>
+        // Sécurise les liens externes
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            link.setAttribute('rel', 'noopener noreferrer');
+        });
 
+        // Met à jour automatiquement l'année
+        document.getElementById('copyright').textContent = `© ${new Date().getFullYear()}`;
+    </script>
     <script src="assets/js/script.js"></script>
 </body>
 </html>
