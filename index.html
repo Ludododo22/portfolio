@@ -30,6 +30,9 @@
             <div class="hero-text">
                 <h1>Je suis <span class="highlight">Ludovic</span>, Développeur en devenir passionné par le web et le design !</h1>
                 <button class="btn-primary">Voir mes projets</button>
+                <a href="https://ludododo22.github.io/portfolio/" target="_blank">
+                    <button class="btn-primary">Mon Portfolio en ligne</button>
+                </a>
             </div>
             <div class="hero-image">
                 <img src="assets/images/128099.jpg" alt="Illustration développeur web">
@@ -46,7 +49,7 @@
                     <p>Je m'appelle <span class="highlight">ATOMO Ludovic</span>, passionné par la création de sites web modernes et interactifs.</p>
                     <p>Je suis actuellement étudiant(e) en <span class="highlight">développement web</span>, et je cherche à améliorer mes compétences en JavaScript, HTML et CSS.</p>
                     <p>J'adore transformer mes idées en projets concrets et expérimenter avec les nouvelles technologies.</p>
-                    <button class="btn-secondary">Télécharger mon CV</button>
+                    <button class="btn-secondary" id="showPdfBtn">Télécharger mon CV</button>
                 </div>
                 <div class="about-image">
                     <div class="profile-circle">
@@ -198,25 +201,68 @@
             </form>
         </div>
     </section>
+    <!-- Modale PDF -->
+    <div id="pdfModal" class="pdf-modal">
+        <div class="pdf-modal-content">
+            <div class="pdf-modal-header">
+                <h3 class="pdf-modal-title">Mon Curriculum Vitae</h3>
+                <span class="pdf-modal-close">&times;</span>
+            </div>
+            <div class="pdf-viewer-container">
+                <iframe src="assets/CV LUDO.pdf" class="pdf-viewer"></iframe>
+            </div>
+            <div class="pdf-modal-footer">
+                <a href="assets/cv" download class="pdf-download-btn">Télécharger le PDF</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gestion de la modale PDF
+        document.addEventListener('DOMContentLoaded', function() {
+            const pdfModal = document.getElementById('pdfModal');
+            const showPdfBtn = document.getElementById('showPdfBtn');
+            const closeBtn = document.querySelector('.pdf-modal-close');
+            
+            // Ouvrir la modale
+            showPdfBtn.addEventListener('click', function() {
+                pdfModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Empêche le défilement
+            });
+            
+            // Fermer la modale
+            closeBtn.addEventListener('click', function() {
+                pdfModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Fermer en cliquant à l'extérieur
+            pdfModal.addEventListener('click', function(e) {
+                if (e.target === pdfModal) {
+                    pdfModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Animation des barres de compétences
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width + '%';
+            });
+        });
+</script>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <p>Designed by <a href="#" class="footer-link">Ludovic ATOMO</a> with HTML, CSS, JS</p>
-                <p id='copyright'>Tous droits réservés - © 2025</p>
+                <p>Tous droits réservés - 2025</p>
             </div>
         </div>
     </footer>
-    <script>
-        // Sécurise les liens externes
-        document.querySelectorAll('a[target="_blank"]').forEach(link => {
-            link.setAttribute('rel', 'noopener noreferrer');
-        });
 
-        // Met à jour automatiquement l'année
-        document.getElementById('copyright').textContent = `© ${new Date().getFullYear()}`;
-    </script>
     <script src="assets/js/script.js"></script>
 </body>
 </html>
